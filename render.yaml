@@ -1,0 +1,59 @@
+# Render blueprint: https://render.com/docs/blueprint-spec
+# In Render choose New > Blueprint and pick this repository.
+databases:
+  - name: healthdata-talent-db
+    plan: free
+    databaseName: healthdata_talent
+    user: healthdata_talent
+
+services:
+  - type: web
+    name: healthdata-talent
+    runtime: docker
+    plan: free
+    healthCheckPath: /up
+    # IMPORTANT: on the free plan the server's disk is wiped on every deploy and
+    # restart, so uploaded CVs are lost. Before collecting real CVs, move to a
+    # paid plan and uncomment this disk so storage/app/private survives:
+    # disk:
+    #   name: private-storage
+    #   mountPath: /var/www/html/storage/app/private
+    #   sizeGB: 1
+    envVars:
+      - key: APP_NAME
+        value: HealthData Talent UK
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      - key: APP_KEY
+        generateValue: true
+      - key: APP_TIMEZONE
+        value: Europe/London
+      - key: LOG_CHANNEL
+        value: stderr
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_URL
+        fromDatabase:
+          name: healthdata-talent-db
+          property: connectionString
+      - key: SESSION_DRIVER
+        value: database
+      - key: SESSION_ENCRYPT
+        value: "true"
+      - key: SESSION_SECURE_COOKIE
+        value: "true"
+      - key: CACHE_STORE
+        value: database
+      - key: QUEUE_CONNECTION
+        value: sync
+      - key: MAIL_MAILER
+        value: log
+      - key: HDT_REQUIRE_2FA
+        value: "true"
+      - key: ADMIN_EMAIL
+        value: admin@healthdatatalent.co.uk
+      # Read the generated admin password in Render: service > Environment.
+      - key: ADMIN_PASSWORD
+        generateValue: true

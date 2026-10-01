@@ -55,6 +55,16 @@ php artisan hdt:prune-candidates --dry-run                         # retention c
 php artisan test
 ```
 
+## Deploy to Render
+
+The repository includes a `Dockerfile` and a `render.yaml` blueprint (web service plus PostgreSQL).
+
+1. Sign in at https://render.com with GitHub and choose **New > Blueprint**.
+2. Pick this repository and apply. Render builds the image, runs migrations and seeds the admin login.
+3. The admin password is the generated `ADMIN_PASSWORD` under the service's **Environment** tab.
+
+On the free plan the server's disk is wiped on every deploy and restart, so **uploaded CVs do not persist**, and the free database is time-limited. Use a paid plan with the disk in `render.yaml` uncommented before collecting real candidate data.
+
 ## Before going live
 
 1. `APP_ENV=production`, `APP_DEBUG=false`, `SESSION_SECURE_COOKIE=true`, and serve over HTTPS only.

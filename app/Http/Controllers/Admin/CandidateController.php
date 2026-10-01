@@ -22,10 +22,10 @@ class CandidateController extends Controller
             ->when($q !== '', function ($query) use ($q) {
                 $like = '%'.addcslashes($q, '%_\\').'%';
                 $query->where(fn ($w) => $w
-                    ->where('name', 'like', $like)
-                    ->orWhere('email', 'like', $like)
-                    ->orWhere('current_title', 'like', $like)
-                    ->orWhere('location', 'like', $like));
+                    ->whereLike('name', $like)
+                    ->orWhereLike('email', $like)
+                    ->orWhereLike('current_title', $like)
+                    ->orWhereLike('location', $like));
             })
             ->when(in_array($track, ['data', 'doctor'], true), fn ($query) => $query->where('track', $track))
             ->latest()

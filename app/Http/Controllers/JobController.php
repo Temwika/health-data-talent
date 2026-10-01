@@ -19,12 +19,12 @@ class JobController extends Controller
             ->when($filters['q'] ?? null, function ($query, $q) {
                 $like = '%'.addcslashes($q, '%_\\').'%';
                 $query->where(fn ($w) => $w
-                    ->where('title', 'like', $like)
-                    ->orWhere('organisation_name', 'like', $like)
-                    ->orWhere('skills', 'like', $like)
-                    ->orWhere('location', 'like', $like));
+                    ->whereLike('title', $like)
+                    ->orWhereLike('organisation_name', $like)
+                    ->orWhereLike('skills', $like)
+                    ->orWhereLike('location', $like));
             })
-            ->when($filters['pattern'] ?? null, fn ($query, $p) => $query->where('pattern', 'like', $p.'%'))
+            ->when($filters['pattern'] ?? null, fn ($query, $p) => $query->whereLike('pattern', $p.'%'))
             ->when($filters['area'] ?? null, fn ($query, $a) => $query->where('area', $a))
             ->latest('published_at')
             ->paginate(10)
