@@ -21,7 +21,7 @@ cPanel → **MySQL Databases**:
 
 cPanel → **File Manager** → go to your home folder (the one that *contains* `public_html`, not inside it).
 
-1. Upload `healthdata-talent-cpanel.zip`.
+1. Upload `healthdata-talent-cpanel.zip` (in the `dist/` folder of the repository).
 2. Extract it. You should now have `~/healthdata/` next to `public_html/`.
 
 The zip already includes the `vendor/` folder, so you do not need Composer on the server.
