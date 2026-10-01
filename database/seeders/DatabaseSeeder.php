@@ -19,13 +19,15 @@ class DatabaseSeeder extends Seeder
 
     private function seedAdmin(): void
     {
-        $email = env('ADMIN_EMAIL', 'admin@healthdatatalent.co.uk');
-        if (User::where('email', $email)->exists()) {
+        // Never create a second admin: this seeder also runs on every deploy.
+        $email = config('hdt.admin_email');
+        if (User::where('role', 'admin')->exists() || User::where('email', $email)->exists()) {
             return;
         }
 
         // No default password is baked into the code: use ADMIN_PASSWORD or a random one, shown once.
-        $password = env('ADMIN_PASSWORD') ?: Str::password(20, symbols: false);
+        $configured = config('hdt.admin_password');
+        $password = $configured ?: Str::password(20, symbols: false);
 
         $user = new User(['name' => 'Site administrator', 'email' => $email, 'password' => $password]);
         $user->role = 'admin';
@@ -33,7 +35,7 @@ class DatabaseSeeder extends Seeder
 
         $this->command?->warn('Admin login created');
         $this->command?->line('  Email:    '.$email);
-        $this->command?->line('  Password: '.(env('ADMIN_PASSWORD') ? '(from ADMIN_PASSWORD in .env)' : $password));
+        $this->command?->line('  Password: '.($configured ?'(from ADMIN_PASSWORD in .env)' : $password));
         $this->command?->line('  Sign in at /admin/login. You will be asked to set up two-factor authentication.');
     }
 

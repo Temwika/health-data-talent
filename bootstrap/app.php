@@ -14,9 +14,6 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        // The app runs behind the host's HTTPS proxy; trust it so secure cookies,
-        // HSTS and the real client IP (rate limits, audit log) work.
-        $middleware->trustProxies(at: '*');
         $middleware->web(append: [SecurityHeaders::class]);
 
         $middleware->alias([

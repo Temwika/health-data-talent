@@ -5,6 +5,10 @@ return [
     'company' => 'HealthData Talent UK Limited',
     'contact_email' => env('HDT_CONTACT_EMAIL', 'hello@healthdatatalent.co.uk'),
 
+    // First admin account, created by the database seeder.
+    'admin_email' => env('ADMIN_EMAIL', 'admin@healthdatatalent.co.uk'),
+    'admin_password' => env('ADMIN_PASSWORD'),
+
     /*
     | Security and data protection
     */

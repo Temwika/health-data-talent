@@ -30,6 +30,8 @@ services:
         generateValue: true
       - key: APP_TIMEZONE
         value: Europe/London
+      - key: TRUSTED_PROXIES
+        value: "*"
       - key: LOG_CHANNEL
         value: stderr
       - key: DB_CONNECTION
