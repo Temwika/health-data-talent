@@ -8,6 +8,7 @@
   --navy: #0B2239; --navy-ink: #F2F7FA; --navy-muted: #B5C6D6; --navy-line: #1F3D5A; --signal: #5CC7BB;
   --accent: #E09A2D; --accent-ink: #2A1A00;
   --danger: #A8261D; --ok: #1C7148;
+  --logo-blue: #0738A6; --logo-teal: #14A9AC;
   --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
   --body: "Public Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
   --r-sm: 6px; --r-md: 12px;
@@ -19,6 +20,7 @@
     --brand: #5CC7BB; --brand-ink: #04211E; --brand-soft: #143039;
     --navy: #0D2740; --navy-line: #254867;
     --accent: #F0B256; --danger: #FF8A80; --ok: #6FD3A0;
+    --logo-blue: #8FB0FF; --logo-teal: #3CCFCB;
     color-scheme: dark;
   }
 }
@@ -41,12 +43,10 @@ a { color: var(--brand); text-underline-offset: 3px; }
 header.site { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: saturate(1.4) blur(10px); border-bottom: 1px solid var(--line); }
 .bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 68px; position: relative; }
 .logo { display: flex; align-items: center; gap: .6rem; text-decoration: none; color: var(--ink); }
-.logo svg { flex: none; }
-.logo b { font: 800 1.15rem/1 var(--display); letter-spacing: -.01em; }
+.logo img { flex: none; display: block; }
+.logo b { display: block; font: 800 1.15rem/1.05 var(--display); letter-spacing: -.01em; color: var(--logo-blue); }
+.logo b + b { color: var(--logo-teal); }
 .logo small { display: block; font: 500 .72rem/1.2 var(--body); color: var(--muted); letter-spacing: .02em; }
-.logo-tile { fill: var(--navy); }
-.logo-trace { fill: none; stroke: var(--signal); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
-.logo-dot { fill: var(--accent); }
 nav.main ul { display: flex; align-items: center; gap: .15rem; list-style: none; margin: 0; padding: 0; }
 nav.main a, .navlink { display: block; padding: .5rem .7rem; border-radius: var(--r-sm); text-decoration: none; color: var(--ink); font: 500 .96rem var(--body); background: none; border: 0; cursor: pointer; }
 nav.main a[aria-current="page"] { background: var(--brand-soft); color: var(--brand); }

@@ -22,7 +22,7 @@
     <h2>Employers: summary of terms of business</h2>
     <ul>
         <li>Our full terms of business are agreed in writing before we start work on a role.</li>
-        <li>Specialist recruitment fees are a percentage of first-year basic salary, agreed per role <span class="ph">[e.g. 12–15%]</span>, payable on the candidate's start date within <span class="ph">[30]</span> days.</li>
+        <li>Specialist recruitment fees are a percentage of first-year basic salary, agreed with you per role, payable on the candidate's start date within <span class="ph">[30]</span> days.</li>
         <li>A rebate applies if a placed candidate leaves within <span class="ph">[12]</span> weeks <span class="ph">[set scale]</span>.</li>
         <li>A fee is payable if you engage a candidate we introduced within <span class="ph">[12]</span> months of introduction.</li>
         <li>Shortlist sourcing and talent mapping are charged at the fixed price in your proposal.</li>

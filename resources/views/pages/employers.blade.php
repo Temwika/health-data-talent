@@ -58,11 +58,12 @@
 <section class="tint">
     <div class="wrap">
         <h2>Services</h2>
+        <p class="lede">Our rates depend on the role and the service, so we quote once we understand what you need. Nothing is charged until terms are agreed in writing.</p>
         <div class="services">
-            <div class="svc"><h3>Specialist recruitment</h3><p>End-to-end search, screening and shortlisting for permanent roles. You pay only when you hire.</p><span class="price">Fee agreed per role</span></div>
-            <div class="svc"><h3>Shortlist sourcing</h3><p>For teams running their own process: we deliver a screened shortlist of qualified people.</p><span class="price">From £750</span></div>
-            <div class="svc"><h3>Talent mapping</h3><p>Research on where specific skills sit in the market, for workforce planning or a hard-to-fill team.</p><span class="price">From £1,000</span></div>
-            <div class="svc"><h3>Doctors for NGOs</h3><p>Credential-checked doctors for remote advisory, guideline, telemedicine, research and training contracts.</p><span class="price">Fee agreed per brief</span></div>
+            <div class="svc"><h3>Specialist recruitment</h3><p>End-to-end search, screening and shortlisting for permanent roles. You pay only when you hire.</p><span class="price">Rates on request</span></div>
+            <div class="svc"><h3>Shortlist sourcing</h3><p>For teams running their own process: we deliver a screened shortlist of qualified people.</p><span class="price">Rates on request</span></div>
+            <div class="svc"><h3>Talent mapping</h3><p>Research on where specific skills sit in the market, for workforce planning or a hard-to-fill team.</p><span class="price">Rates on request</span></div>
+            <div class="svc"><h3>Doctors for NGOs</h3><p>Credential-checked doctors for remote advisory, guideline, telemedicine, research and training contracts.</p><span class="price">Rates on request</span></div>
         </div>
     </div>
 </section>

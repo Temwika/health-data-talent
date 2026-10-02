@@ -9,7 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/site.css') }}">
-    <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
+    <meta property="og:image" content="{{ asset('img/logo-full.png') }}">
+    <link rel="icon" href="{{ asset('favicon.png') }}" type="image/png">
     <script src="{{ asset('js/site.js') }}" defer></script>
 </head>
 <body>
@@ -18,12 +19,8 @@
 <header class="site">
     <div class="wrap bar">
         <a class="logo" href="{{ route('home') }}" aria-label="HealthData Talent UK home">
-            <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
-                <rect class="logo-tile" width="36" height="36" rx="9"/>
-                <path class="logo-trace" d="M5 20h6l2.5-6 4 12 3-9 2 3h8.5"/>
-                <circle class="logo-dot" cx="30.5" cy="20" r="2.4"/>
-            </svg>
-            <span><b>HealthData Talent</b><small>UK Limited</small></span>
+            <img src="{{ asset('img/logo-mark.png') }}" width="46" height="46" alt="">
+            <span><b>HealthData</b><b>Talent UK</b></span>
         </a>
         <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav" data-menu>Menu</button>
         <nav class="main" id="nav" aria-label="Main">
