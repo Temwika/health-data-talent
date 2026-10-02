@@ -9,7 +9,7 @@
 </div>
 <div class="wrap page-body prose narrow">
     <h2>Who we are</h2>
-    <p>{{ config('hdt.company') }} (“we”, “us”) is a recruitment agency registered in England and Wales, company number <span class="ph">[number]</span>, registered office <span class="ph">[address]</span>. We are the data controller for the personal information described here and are registered with the Information Commissioner's Office, registration number <span class="ph">[ICO number]</span>. Contact our data protection lead at <span class="ph">privacy@[yourdomain]</span>.</p>
+    <p>{{ config('hdt.company') }} (“we”, “us”) is a recruitment agency registered in England and Wales, company number {{ config('hdt.company_number') }}, registered office {{ implode(', ', config('hdt.address')) }}. We are the data controller for the personal information described here and are registered with the Information Commissioner's Office, registration number <span class="ph">[ICO number]</span>. Contact our data protection lead at <span class="ph">privacy@[yourdomain]</span>.</p>
 
     <h2>What we collect</h2>
     <h3>Candidates</h3>

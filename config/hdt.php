@@ -3,7 +3,9 @@
 return [
 
     'company' => 'HealthData Talent UK Limited',
+    'company_number' => '17492692',
     'contact_email' => env('HDT_CONTACT_EMAIL', 'hello@healthdatatalent.co.uk'),
+    'address' => ['74 Fishponds Road West', 'Woodthorpe', 'Sheffield', 'S13 8EB', 'UK'],
 
     // First admin account, created by the database seeder.
     'admin_email' => env('ADMIN_EMAIL', 'admin@healthdatatalent.co.uk'),
