@@ -26,7 +26,7 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; scroll-padding-top: 96px; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 112px; }
 body { margin: 0; background: var(--bg); color: var(--ink); font: 400 1.0625rem/1.6 var(--body); text-rendering: optimizeLegibility; }
 img, svg { max-width: 100%; }
 a { color: var(--brand); text-underline-offset: 3px; }
@@ -41,10 +41,10 @@ a { color: var(--brand); text-underline-offset: 3px; }
 
 /* ---------- Header ---------- */
 header.site { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: saturate(1.4) blur(10px); border-bottom: 1px solid var(--line); }
-.bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 80px; position: relative; }
-.logo { display: flex; align-items: center; gap: .7rem; text-decoration: none; color: var(--ink); }
+.bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 96px; position: relative; }
+.logo { display: flex; align-items: center; gap: .8rem; text-decoration: none; color: var(--ink); }
 .logo img { flex: none; display: block; }
-.logo b { display: block; font: 800 1.45rem/1.05 var(--display); letter-spacing: -.01em; color: var(--logo-blue); }
+.logo b { display: block; font: 800 1.8rem/1.05 var(--display); letter-spacing: -.01em; color: var(--logo-blue); }
 .logo b + b { color: var(--logo-teal); }
 .logo small { display: block; font: 500 .72rem/1.2 var(--body); color: var(--muted); letter-spacing: .02em; }
 nav.main ul { display: flex; align-items: center; gap: .15rem; list-style: none; margin: 0; padding: 0; }
@@ -54,6 +54,9 @@ nav.main a:hover, .navlink:hover { background: var(--brand-soft); }
 .menu-btn { display: none; background: none; border: 1px solid var(--line); color: var(--ink); border-radius: var(--r-sm); padding: .45rem .7rem; font: 600 .95rem var(--body); cursor: pointer; }
 @media (max-width: 980px) {
   .menu-btn { display: block; }
+  .bar { min-height: 80px; }
+  .logo img { width: 60px; height: 60px; }
+  .logo b { font-size: 1.45rem; }
   nav.main { position: absolute; top: 100%; left: -1.25rem; right: -1.25rem; background: var(--surface); border-bottom: 1px solid var(--line); display: none; }
   nav.main.open { display: block; }
   nav.main ul { flex-direction: column; align-items: stretch; padding: .75rem 1.25rem 1rem; }

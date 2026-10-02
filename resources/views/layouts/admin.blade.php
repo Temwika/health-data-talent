@@ -18,7 +18,7 @@
 <header class="site">
     <div class="wrap bar">
         <a class="logo" href="{{ route('admin.dashboard') }}">
-            <img src="{{ asset('img/logo-mark.png') }}" width="60" height="60" alt="">
+            <img src="{{ asset('img/logo-mark.png') }}" width="76" height="76" alt="">
             <span><b>HealthData</b><b>Talent UK</b><small>Admin</small></span>
         </a>
         @auth
