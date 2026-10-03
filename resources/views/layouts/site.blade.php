@@ -19,7 +19,7 @@
 <header class="site">
     <div class="wrap bar">
         <a class="logo" href="{{ route('home') }}" aria-label="HealthData Talent UK home">
-            <img src="{{ asset('img/logo-mark.png') }}" width="76" height="76" alt="">
+            <img src="{{ asset('img/logo-mark.png') }}" width="96" height="96" alt="">
             <span><b>HealthData</b><b>Talent UK</b></span>
         </a>
         <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav" data-menu>Menu</button>
@@ -99,6 +99,7 @@
             Registered office: {{ implode(', ', config('hdt.address')) }}. ICO registration <span class="ph">[number]</span>.
             We do not charge candidates for work-finding services. © {{ date('Y') }}
         </p>
+        <p class="credit">Designed by <a href="https://www.upliftserviceszm.com/" rel="noopener">Uplift Services Limited</a></p>
     </div>
 </footer>
 </body>
