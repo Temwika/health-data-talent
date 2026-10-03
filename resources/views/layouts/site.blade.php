@@ -19,7 +19,7 @@
 <header class="site">
     <div class="wrap bar">
         <a class="logo" href="{{ route('home') }}" aria-label="HealthData Talent UK home">
-            <img src="{{ asset('img/logo-mark.png') }}" width="120" height="120" alt="">
+            <img src="{{ asset('img/logo-mark.png') }}" width="140" height="140" alt="">
             <span><b>HealthData</b><b>Talent UK</b></span>
         </a>
         <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav" data-menu>Menu</button>
