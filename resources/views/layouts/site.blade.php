@@ -19,7 +19,7 @@
 <header class="site">
     <div class="wrap bar">
         <a class="logo" href="{{ route('home') }}" aria-label="HealthData Talent UK home">
-            <img src="{{ asset('img/logo-mark.png') }}" width="96" height="96" alt="">
+            <img src="{{ asset('img/logo-mark.png') }}" width="120" height="120" alt="">
             <span><b>HealthData</b><b>Talent UK</b></span>
         </a>
         <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav" data-menu>Menu</button>
@@ -47,60 +47,79 @@
 
 <footer class="site-foot">
     <div class="wrap">
-        <div class="foot-brand">
-            <a class="foot-logo" href="{{ route('home') }}" aria-label="HealthData Talent UK home">
-                <img src="{{ asset('img/logo-mark.png') }}" width="64" height="64" alt="">
-                <span><b>HealthData</b><b>Talent UK</b></span>
-            </a>
-            <p class="foot-tag">Connecting health data, informatics and digital-health talent.</p>
-            <div class="foot-cta">
-                <a class="btn accent small" href="{{ route('employers.create') }}">Hire talent</a>
-                <a class="btn ghost small" href="{{ route('candidates.create') }}">Join the network</a>
+        <div class="foot-card">
+            <div>
+                <p class="foot-kicker">Let's talk</p>
+                <h2>Hiring for a <span class="nowrap">hard-to-fill</span> health data role?</h2>
+                <p>Tell us what you need. We reply within one working day, and candidates never pay a thing.</p>
+            </div>
+            <div class="foot-card-actions">
+                <a class="btn foot-btn" href="{{ route('employers.create') }}">Hire talent</a>
+                <a class="btn foot-btn-line" href="{{ route('candidates.create') }}">Join the network</a>
             </div>
         </div>
-        <div class="foot">
-            <div>
-                <h2 class="foot-h">Find us</h2>
-                <address>
-                    {{ config('hdt.company') }}<br>
-                    {!! implode('<br>', array_map('e', config('hdt.address'))) !!}
-                </address>
-                <p><a href="mailto:{{ config('hdt.contact_email') }}">{{ config('hdt.contact_email') }}</a></p>
-            </div>
-            <div>
-                <h2 class="foot-h">Employers</h2>
-                <ul>
-                    <li><a href="{{ route('employers.create') }}">Hire talent</a></li>
-                    <li><a href="{{ route('vacancies.create') }}">Submit a vacancy</a></li>
-                    <li><a href="{{ route('employers.create', ['service' => 'ngo-doctor']) }}">Find a doctor for your NGO</a></li>
+
+        <div class="foot-main">
+            <div class="foot-id">
+                <a class="foot-logo" href="{{ route('home') }}" aria-label="HealthData Talent UK home">
+                    <img src="{{ asset('img/logo-mark.png') }}" width="68" height="68" alt="">
+                    <span><b>HealthData</b><b>Talent UK</b></span>
+                </a>
+                <p class="foot-tag">Connecting health data, informatics and digital-health talent.</p>
+                <ul class="foot-contact">
+                    <li>
+                        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="9.5" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+                        <address>{!! implode('<br>', array_map('e', config('hdt.address'))) !!}</address>
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m4 7 8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+                        <a href="mailto:{{ config('hdt.contact_email') }}">{{ config('hdt.contact_email') }}</a>
+                    </li>
                 </ul>
             </div>
-            <div>
-                <h2 class="foot-h">Candidates</h2>
-                <ul>
-                    <li><a href="{{ route('candidates.create') }}">Join the network</a></li>
-                    <li><a href="{{ route('jobs.index') }}">Jobs</a></li>
-                    <li><a href="{{ route('doctors') }}">Doctors &amp; NGOs</a></li>
-                </ul>
-            </div>
-            <div>
-                <h2 class="foot-h">Company</h2>
-                <ul>
-                    <li><a href="{{ route('about') }}">About</a></li>
-                    <li><a href="{{ route('insights.index') }}">Insights</a></li>
-                    <li><a href="{{ route('contact.create') }}">Contact</a></li>
-                    <li><a href="{{ route('privacy') }}">Privacy notice</a></li>
-                    <li><a href="{{ route('terms') }}">Terms</a></li>
-                </ul>
+            <nav class="foot-links" aria-label="Footer">
+                <div>
+                    <h2 class="foot-h">Employers</h2>
+                    <ul>
+                        <li><a href="{{ route('employers.create') }}">Hire talent</a></li>
+                        <li><a href="{{ route('vacancies.create') }}">Submit a vacancy</a></li>
+                        <li><a href="{{ route('employers.create', ['service' => 'ngo-doctor']) }}">Find a doctor for your NGO</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h2 class="foot-h">Candidates</h2>
+                    <ul>
+                        <li><a href="{{ route('candidates.create') }}">Join the network</a></li>
+                        <li><a href="{{ route('jobs.index') }}">Browse jobs</a></li>
+                        <li><a href="{{ route('doctors') }}">Doctors &amp; NGOs</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h2 class="foot-h">Company</h2>
+                    <ul>
+                        <li><a href="{{ route('about') }}">About</a></li>
+                        <li><a href="{{ route('insights.index') }}">Insights</a></li>
+                        <li><a href="{{ route('contact.create') }}">Contact</a></li>
+                        <li><a href="{{ route('privacy') }}">Privacy notice</a></li>
+                        <li><a href="{{ route('terms') }}">Terms</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+        <div class="foot-bottom">
+            <p class="legalline">
+                © {{ date('Y') }} {{ config('hdt.company') }}. Registered in England and Wales, company number {{ config('hdt.company_number') }}.
+                Registered office: {{ implode(', ', config('hdt.address')) }}. ICO registration <span class="ph">[number]</span>.
+                We do not charge candidates for work-finding services.
+            </p>
+            <div class="foot-meta">
+                <p class="credit">Designed by <a href="https://www.upliftserviceszm.com/" rel="noopener">Uplift Services Limited</a></p>
+                <a class="totop" href="#main">Back to top <span aria-hidden="true">↑</span></a>
             </div>
         </div>
-        <p class="legalline">
-            {{ config('hdt.company') }} is registered in England and Wales, company number {{ config('hdt.company_number') }}.
-            Registered office: {{ implode(', ', config('hdt.address')) }}. ICO registration <span class="ph">[number]</span>.
-            We do not charge candidates for work-finding services. © {{ date('Y') }}
-        </p>
-        <p class="credit">Designed by <a href="https://www.upliftserviceszm.com/" rel="noopener">Uplift Services Limited</a></p>
     </div>
 </footer>
+
 </body>
 </html>
