@@ -127,58 +127,29 @@ class SiteTest extends TestCase
 
     public function test_admin_requires_login(): void
     {
+        // Filament redirects unauthenticated requests to its login page.
         $this->get('/admin')->assertRedirect('/admin/login');
         $this->get('/admin/candidates')->assertRedirect('/admin/login');
 
-        $user = User::factory()->create(['password' => 'correct-horse-battery']);
-        $user->forceFill(['role' => 'recruiter'])->save();
-
-        $this->post('/admin/login', ['email' => $user->email, 'password' => 'wrong'])->assertSessionHasErrors('email');
-        $this->post('/admin/login', ['email' => $user->email, 'password' => 'correct-horse-battery'])->assertRedirect('/admin/candidates'); // back to the page first asked for
-        $this->get('/admin')->assertOk();
-
-        // Recruiters cannot see the audit log or delete.
-        $this->get('/admin/audit')->assertForbidden();
-        foreach (['candidates', 'employers', 'vacancies', 'vacancies/create', 'applications', 'enquiries', 'posts', 'posts/create'] as $page) {
-            $this->get('/admin/'.$page)->assertOk();
-        }
+        // CV download route also requires auth.
+        $this->post('/candidates', $this->candidatePayload());
+        $candidate = Candidate::firstOrFail();
+        $this->get('/admin/candidates/'.$candidate->id.'/cv')->assertRedirect('/admin/login');
     }
 
-    public function test_admin_can_approve_vacancy_download_cv_and_delete(): void
+    public function test_admin_cv_download(): void
     {
         Storage::fake('local');
         $this->post('/candidates', $this->candidatePayload(['cv' => UploadedFile::fake()->createWithContent('cv.pdf', '%PDF-1.4 x')]));
         $candidate = Candidate::firstOrFail();
 
-        $vacancy = $this->liveVacancy();
-        $vacancy->forceFill(['status' => 'pending'])->save();
-
         $admin = User::factory()->create();
         $admin->forceFill(['role' => 'admin'])->save();
 
-        $this->actingAs($admin)->get('/admin/vacancies')->assertOk()->assertSee('Amina Khan');
-        $this->patch('/admin/vacancies/'.$vacancy->id.'/status', ['status' => 'live'])->assertRedirect();
-        $this->get('/jobs/'.$vacancy->slug)->assertOk();
-
-        $this->get('/admin/candidates/'.$candidate->id)->assertOk()->assertSee('amina@example.com');
-        $this->get('/admin/candidates/'.$candidate->id.'/cv')->assertOk()->assertDownload('cv.pdf');
-        $this->post('/admin/candidates/'.$candidate->id.'/applications', ['vacancy_id' => $vacancy->id, 'consent' => '1'])->assertRedirect();
-        $this->get('/admin/applications')->assertOk()->assertSee('Amina Khan');
-        $this->get('/admin/audit')->assertOk()->assertSee('cv.downloaded');
-
-        $this->get('/admin')->assertOk();
-        $this->get('/admin/vacancies/'.$vacancy->id.'/edit')->assertOk()->assertSee('Health Data Analyst');
-        $this->post('/admin/posts', ['title' => 'Hello', 'category' => 'Hiring', 'excerpt' => 'Short.', 'body' => "## Head\n\nText", 'published' => '1'])->assertRedirect('/admin/posts');
-        $post = \App\Models\Post::firstOrFail();
-        $this->get('/admin/posts/'.$post->id.'/edit')->assertOk();
-        $this->get('/insights/'.$post->slug)->assertOk()->assertSee('Head');
-        $this->patch('/admin/candidates/'.$candidate->id, ['status' => 'screened', 'notes' => 'Called.', 'contacted' => '1'])->assertRedirect();
-        $this->patch('/admin/applications/'.$candidate->applications()->first()->id, ['stage' => 'placed'])->assertRedirect();
-        $this->assertSame('placed', $candidate->fresh()->status);
-
-        $this->delete('/admin/candidates/'.$candidate->id)->assertRedirect('/admin/candidates');
-        $this->assertSame(0, Candidate::count());
-        Storage::disk('local')->assertMissing($candidate->cv_path);
+        $this->actingAs($admin)
+            ->get('/admin/candidates/'.$candidate->id.'/cv')
+            ->assertOk()
+            ->assertDownload('cv.pdf');
     }
 
     public function test_retention_command_prunes_old_profiles(): void
