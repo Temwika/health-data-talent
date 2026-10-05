@@ -13,7 +13,7 @@ php artisan serve
 
 Open http://localhost:8000. Staff sign in at http://localhost:8000/admin/login.
 
-The seeder creates one admin account (`ADMIN_EMAIL` in `.env`). Set `ADMIN_PASSWORD` before seeding, or leave it empty and copy the random password the seeder prints. At first sign-in you enrol an authenticator app.
+The seeder creates one admin account (`ADMIN_EMAIL` in `.env`). Set `ADMIN_PASSWORD` before seeding, or leave it empty and copy the random password the seeder prints. While `ADMIN_PASSWORD` is set, every seed run resets the admin password to it, so changing it and re-seeding recovers a lost login. At first sign-in you enrol an authenticator app.
 
 There is no front-end build step. Styles and scripts are plain files in `public/css/site.css` and `public/js/site.js`.
 
@@ -61,7 +61,7 @@ The repository includes a `Dockerfile` and a `render.yaml` blueprint (web servic
 
 1. Sign in at https://render.com with GitHub and choose **New > Blueprint**.
 2. Pick this repository and apply. Render builds the image, runs migrations and seeds the admin login.
-3. The admin password is the generated `ADMIN_PASSWORD` under the service's **Environment** tab.
+3. The admin password is the generated `ADMIN_PASSWORD` under the service's **Environment** tab. To reset a lost admin login, change that value and redeploy.
 
 On the free plan the server's disk is wiped on every deploy and restart, so **uploaded CVs do not persist**, and the free database is time-limited. Use a paid plan with the disk in `render.yaml` uncommented before collecting real candidate data.
 

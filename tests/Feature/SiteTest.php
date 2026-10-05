@@ -8,6 +8,7 @@ use App\Models\Vacancy;
 use App\Support\Totp;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
@@ -55,6 +56,19 @@ class SiteTest extends TestCase
         $response->assertHeader('X-Frame-Options', 'DENY');
         $this->assertStringContainsString("script-src 'self'", $response->headers->get('Content-Security-Policy'));
         $this->assertStringNotContainsString('style="', $response->getContent());
+    }
+
+    public function test_seeder_resets_admin_password_from_env(): void
+    {
+        config(['hdt.admin_email' => 'admin@example.com', 'hdt.admin_password' => 'first-password-123']);
+        $this->seed();
+        $admin = User::where('email', 'admin@example.com')->firstOrFail();
+        $this->assertTrue(Hash::check('first-password-123', $admin->password));
+
+        config(['hdt.admin_password' => 'second-password-456']);
+        $this->seed();
+        $this->assertTrue(Hash::check('second-password-456', $admin->fresh()->password));
+        $this->assertSame(1, User::where('role', 'admin')->count());
     }
 
     public function test_candidate_registers_with_cv_stored_privately(): void

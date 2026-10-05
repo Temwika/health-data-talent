@@ -2,10 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\AuditLog;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Vacancy;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
@@ -19,14 +21,27 @@ class DatabaseSeeder extends Seeder
 
     private function seedAdmin(): void
     {
-        // Never create a second admin: this seeder also runs on every deploy.
         $email = config('hdt.admin_email');
-        if (User::where('role', 'admin')->exists() || User::where('email', $email)->exists()) {
+        $configured = config('hdt.admin_password');
+
+        // ADMIN_PASSWORD, when set, is the source of truth: changing it and redeploying resets a lost login.
+        $existing = User::where('email', $email)->first();
+        if ($existing) {
+            if ($configured && ! Hash::check($configured, $existing->password)) {
+                $existing->forceFill(['password' => $configured])->save();
+                AuditLog::record('user.saved', $existing, "Password for {$email} reset from ADMIN_PASSWORD");
+                $this->command?->warn("Admin password for {$email} reset from ADMIN_PASSWORD.");
+            }
+
+            return;
+        }
+
+        // Never create a second admin: this seeder also runs on every deploy.
+        if (User::where('role', 'admin')->exists()) {
             return;
         }
 
         // No default password is baked into the code: use ADMIN_PASSWORD or a random one, shown once.
-        $configured = config('hdt.admin_password');
         $password = $configured ?: Str::password(20, symbols: false);
 
         $user = new User(['name' => 'Site administrator', 'email' => $email, 'password' => $password]);

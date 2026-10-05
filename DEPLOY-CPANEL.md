@@ -48,7 +48,7 @@ DB_PASSWORD=your-database-password
 SESSION_SECURE_COOKIE=true
 
 ADMIN_EMAIL=you@yourdomain.co.uk
-ADMIN_PASSWORD=choose-a-long-password   # used once, when the admin login is created
+ADMIN_PASSWORD=choose-a-long-password   # applied to the admin login each time the seeder runs
 ```
 
 **APP_KEY:** generate a fresh one for the live site. On your own PC, in the project folder, run `php artisan key:generate --show` and paste the whole output (starting `base64:`) into `APP_KEY`. Do not reuse the key from your local `.env`, and never change it after the site holds data.
@@ -101,6 +101,7 @@ This runs the daily data-retention clean-up.
 - `https://yourdomain.co.uk/admin/login` lets you sign in with `ADMIN_EMAIL` / `ADMIN_PASSWORD` and set up two-factor.
 - Turn on **Force HTTPS Redirect** in cPanel → Domains.
 - Remove `ADMIN_PASSWORD` from `.env`, then re-run `php artisan config:cache`.
+- Locked out later? Put a new `ADMIN_PASSWORD` in `.env` and run step 6 again. The seeder resets the admin password to that value.
 
 ## Folder permissions
 
