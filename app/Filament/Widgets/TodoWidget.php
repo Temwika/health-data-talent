@@ -12,7 +12,7 @@ use Filament\Widgets\StatsOverviewWidget\Stat;
 class TodoWidget extends BaseWidget
 {
     protected static ?int $sort = 2;
-    protected static ?string $heading = 'Action required';
+    protected ?string $heading = 'Action required';
 
     protected function getStats(): array
     {
