@@ -51,7 +51,7 @@ class DatabaseSeeder extends Seeder
         $this->command?->warn('Admin login created');
         $this->command?->line('  Email:    '.$email);
         $this->command?->line('  Password: '.($configured ?'(from ADMIN_PASSWORD in .env)' : $password));
-        $this->command?->line('  Sign in at /admin/login. You will be asked to set up two-factor authentication.');
+        $this->command?->line('  Sign in at /admin/login.');
     }
 
     private function seedExampleVacancies(): void
