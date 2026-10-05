@@ -49,7 +49,6 @@ class AuthController extends Controller
 
         RateLimiter::clear($key);
         $request->session()->regenerate();
-        $request->session()->forget('two_factor_passed');
 
         $request->user()->forceFill(['last_login_at' => now()])->save();
         AuditLog::record('login', $request->user(), 'Signed in');

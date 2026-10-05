@@ -15,8 +15,7 @@ return [
     /*
     | Security and data protection
     */
-    'require_2fa' => env('HDT_REQUIRE_2FA', true),
-    'retention_months' => (int) env('HDT_RETENTION_MONTHS', 24),
+'retention_months' => (int) env('HDT_RETENTION_MONTHS', 24),
     'privacy_version' => env('HDT_PRIVACY_VERSION', '2026-10'),
     'cv_max_kb' => 5120,
     // Full path to clamscan / clamdscan. When empty, uploads are marked "unscanned".

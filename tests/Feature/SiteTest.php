@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use App\Models\Candidate;
 use App\Models\User;
 use App\Models\Vacancy;
-use App\Support\Totp;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Hash;
@@ -126,7 +125,7 @@ class SiteTest extends TestCase
         $this->get('/jobs')->assertDontSee('BI Developer');
     }
 
-    public function test_admin_requires_login_and_two_factor(): void
+    public function test_admin_requires_login(): void
     {
         $this->get('/admin')->assertRedirect('/admin/login');
         $this->get('/admin/candidates')->assertRedirect('/admin/login');
@@ -136,14 +135,6 @@ class SiteTest extends TestCase
 
         $this->post('/admin/login', ['email' => $user->email, 'password' => 'wrong'])->assertSessionHasErrors('email');
         $this->post('/admin/login', ['email' => $user->email, 'password' => 'correct-horse-battery'])->assertRedirect('/admin/candidates'); // back to the page first asked for
-
-        // Signed in but no second factor yet: forced to enrol.
-        $this->get('/admin')->assertRedirect('/admin/two-factor/setup');
-        $this->get('/admin/two-factor/setup')->assertOk();
-        $secret = $user->fresh()->two_factor_secret;
-
-        $this->post('/admin/two-factor/setup', ['code' => '000000'])->assertSessionHasErrors('code');
-        $this->post('/admin/two-factor/setup', ['code' => Totp::code($secret)])->assertRedirect('/admin');
         $this->get('/admin')->assertOk();
 
         // Recruiters cannot see the audit log or delete.
@@ -163,13 +154,9 @@ class SiteTest extends TestCase
         $vacancy->forceFill(['status' => 'pending'])->save();
 
         $admin = User::factory()->create();
-        $admin->forceFill(['role' => 'admin', 'two_factor_secret' => Totp::generateSecret(), 'two_factor_confirmed_at' => now()])->save();
+        $admin->forceFill(['role' => 'admin'])->save();
 
-        // Password alone is not enough.
-        $this->actingAs($admin)->get('/admin/candidates/'.$candidate->id.'/cv')->assertRedirect('/admin/two-factor');
-        $this->post('/admin/two-factor', ['code' => Totp::code($admin->two_factor_secret)])->assertRedirect('/admin');
-
-        $this->get('/admin/vacancies')->assertOk()->assertSee('Amina Khan');
+        $this->actingAs($admin)->get('/admin/vacancies')->assertOk()->assertSee('Amina Khan');
         $this->patch('/admin/vacancies/'.$vacancy->id.'/status', ['status' => 'live'])->assertRedirect();
         $this->get('/jobs/'.$vacancy->slug)->assertOk();
 

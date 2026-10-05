@@ -45,13 +45,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::middleware('auth')->group(function () {
         Route::post('logout', [Admin\AuthController::class, 'logout'])->name('logout');
-        Route::get('two-factor', [Admin\TwoFactorController::class, 'challenge'])->name('2fa.challenge');
-        Route::post('two-factor', [Admin\TwoFactorController::class, 'verify'])->middleware('throttle:10,1');
-        Route::get('two-factor/setup', [Admin\TwoFactorController::class, 'setup'])->name('2fa.setup');
-        Route::post('two-factor/setup', [Admin\TwoFactorController::class, 'confirm'])->middleware('throttle:10,1');
-    });
 
-    Route::middleware(['auth', 'twofactor'])->group(function () {
         Route::get('/', Admin\DashboardController::class)->name('dashboard');
 
         Route::get('candidates', [Admin\CandidateController::class, 'index'])->name('candidates.index');

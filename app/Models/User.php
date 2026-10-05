@@ -13,26 +13,19 @@ class User extends Authenticatable
 
     protected $fillable = ['name', 'email', 'password'];
 
-    protected $hidden = ['password', 'remember_token', 'two_factor_secret'];
+    protected $hidden = ['password', 'remember_token'];
 
     protected function casts(): array
     {
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
-            'two_factor_secret' => 'encrypted',
-            'two_factor_confirmed_at' => 'datetime',
-            'last_login_at' => 'datetime',
+'last_login_at' => 'datetime',
         ];
     }
 
     public function isAdmin(): bool
     {
         return $this->role === 'admin';
-    }
-
-    public function hasTwoFactor(): bool
-    {
-        return $this->two_factor_secret !== null && $this->two_factor_confirmed_at !== null;
     }
 }

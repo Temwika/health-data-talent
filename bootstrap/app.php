@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Middleware\EnsureTwoFactor;
 use App\Http\Middleware\RequireRole;
 use App\Http\Middleware\SecurityHeaders;
 use Illuminate\Foundation\Application;
@@ -17,7 +16,6 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->web(append: [SecurityHeaders::class]);
 
         $middleware->alias([
-            'twofactor' => EnsureTwoFactor::class,
             'role' => RequireRole::class,
         ]);
 
